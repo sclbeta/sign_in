@@ -1,5 +1,6 @@
 #coding:utf8
 from PyQt4 import QtCore,QtGui
+import ConfigParser
 
 class MainWindow(QtGui.QMainWindow):
     def __init__(self, parent=None):
@@ -10,7 +11,7 @@ class MainWindow(QtGui.QMainWindow):
         centralWidget = QtGui.QWidget()
         h_layout = QtGui.QHBoxLayout()
         v_layout = QtGui.QVBoxLayout()
-        self.exe_all = QtGui.QPushButton("Start Checkin")
+        self.exe_all = QtGui.QPushButton("Start Signin")
         self.add = QtGui.QPushButton("Add")
         h_layout.addWidget(self.exe_all)
         h_layout.addWidget(self.add)
@@ -23,6 +24,9 @@ class MainWindow(QtGui.QMainWindow):
         self.exe_all.clicked.connect(self.exe_all_func)
         self.add.clicked.connect(self.add_func)
     def exe_all_func(self):
-        print "exe_all_func"
+        cf = ConfigParser.ConfigParser()
+        cf.read("user.ini")
+        content = cf.options("userinfo")
+        print content
     def add_func(self):
         print "add_func"
