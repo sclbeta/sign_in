@@ -1,0 +1,6 @@
+>>> 
+<type 'str'> {"no":0,"error":"","data":{"errno":0,"errmsg":"success","sign_version":2,"is_block":0,"finfo":{"forum_info":{"forum_id":113893,"forum_name":"\u663e\u5361"},"current_rank_info":{"sign_count":193396}},"uinfo":{"user_id":160882934,"is_sign_in":1,"user_sign_rank":193396,"sign_time":1442487500,"cont_sign_num":1,"total_sign_num":2,"cout_total_sing_num":2,"hun_sign_num":1,"total_resign_num":0,"is_org_name":0}}}
+>>> ================================ RESTART ================================
+>>> 
+<type 'str'> {"no":1101,"error":"\u4eb2\uff0c\u4f60\u4e4b\u524d\u5df2\u7ecf\u7b7e\u8fc7\u4e86","data":""}
+>>> 

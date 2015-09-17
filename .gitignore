@@ -5,6 +5,13 @@ __pycache__/
 # C extensions
 *.so
 
+
+*.pyc
+*.pyproj
+*.user
+*.sln
+.vs
+
 # Distribution / packaging
 .Python
 env/
