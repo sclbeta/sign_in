@@ -18,9 +18,13 @@ class MainWindow(QtGui.QMainWindow):
         self.add = QtGui.QPushButton("Add")
         h_layout.addWidget(self.exe_all)
         h_layout.addWidget(self.add)
+        h_layout1 = QtGui.QHBoxLayout()
         self.l_view = QtGui.QListWidget()
+        self.l_view2 = QtGui.QListWidget()
+        h_layout1.addWidget(self.l_view)
+        h_layout1.addWidget(self.l_view2)
         v_layout.addLayout(h_layout)
-        v_layout.addWidget(self.l_view)
+        v_layout.addLayout(h_layout1)
         centralWidget.setLayout(v_layout)
         self.setCentralWidget(centralWidget)
 
@@ -46,11 +50,10 @@ class MainWindow(QtGui.QMainWindow):
         self.exe_all.setText('Proccessing....')
         if bd.login():
             for name in self.lists:
-                if bd.sign_in(name):
-                    self.exe_all.setText(name)
-                    time.sleep(5)
-                self.exe_all.setText('Processing....')
-                time.sleep(5)
+                self.exe_all.setText('....')
+                bd.sign_in(name)
+                self.l_view2.insertItem(0,QtCore.QString(name))
+        self.exe_all.setText('All Done!')
 
     def add_func(self):
         d = dialog.Dialog(self)

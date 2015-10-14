@@ -19,7 +19,7 @@ class database():
         if table == 'Account':
             self.cur.execute('INSERT INTO Account VALUES(?,?,?)',[a,b,c])
         else:
-            self.cur.execute('INSERT INTO Account VALUES(?,?)',[a,b])
+            self.cur.execute('INSERT INTO Task VALUES(?,?)',[a,b])
         return True
     def _del(self,table,a,b):
         self.cur.execute('DELETE FROM %s WHERE %s="%s"' %(table,a,b))

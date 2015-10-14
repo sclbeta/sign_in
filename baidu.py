@@ -9,6 +9,10 @@ import json
 import time
 import os
 
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
+
 cj = cookielib.CookieJar()
 opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
 urllib2.install_opener(opener)
@@ -70,14 +74,12 @@ class Baidu(object):
         # req.add_header(head)
         res = urllib2.urlopen(req).read()
         if 'err_no=257' in res:
-            self.check_vcode(res)
+            pass
+            #self.check_vcode(res)
         elif 'err_no=0' in res:
             return True
         else:
-            #print res
             pass
-        # print len(res), res
-        # self.check_login()
 
     def create_gid(self):
         temp = execjs.compile('''function create_gid() {
@@ -109,14 +111,11 @@ class Baidu(object):
         self.encrypt_keys()
 
     def encrypt_keys(self):
-        # AzxgH51AHQEDhBsi4nC3HBTgH8xQxEBB
-        # THUfZZMGOErtrdXZU/HMwtK6YHoY2spL5YQ4hM9xNtoAt0NS1PG3beI5urx4sZO2AB6werOnAD46bl+FKMJhC1YooMMCIEk8GPh9XKiUJFA90RnpdF2dJ8Gz4/8/1LmIZnKzMqBFZqVSPoatVElK9emmxPiAUTdRX8TDo1ESBJc=
         f = file('baidujiami.js', 'r')
         content = f.read().decode('utf8')
         ctx = execjs.compile(content)
         self.rsa_pwd = ctx.call('any_rsa_pass', self.pubkey, self.pwd)
         f.close()
-        # print self.rsa_pwd
 
     def check_login(self):
         url = 'http://www.baidu.com'
@@ -136,21 +135,20 @@ class Baidu(object):
         else:
             print 'none'
 
-    def sign_in(self,tieba):        
+    def sign_in(self,tieba):
+        print tieba
         self.tieba = tieba
-        tieba = tieba.decode('utf8').encode('gb2312')
+        tieba = tieba.encode('gb2312')
         self.tieba_gbk = urllib.quote(tieba)
-
+        print self.tieba,self.tieba_gbk,tieba        
         url = 'http://tieba.baidu.com/sign/add'
         data = {
-        'ie':'utf-8',
-        'kw':self.tieba,
-        'tbs':self.get_tbs()
+            'ie':'utf-8',
+            'kw':self.tieba,
+            'tbs':self.get_tbs()
         }
         data = urllib.urlencode(data)
-        #print data
         req = urllib2.Request(url, data)
-        # req.add_header(head)
         res = urllib2.urlopen(req).read()
         if 'success' in res:
             return True
@@ -167,8 +165,7 @@ class Baidu(object):
 
 def main():
     baidu = Baidu('vvaa00@126.com','qianlan')
-    if baidu.login():
-        baidu.sign_in('显卡')
+    baidu.sign_in(u'显卡')
 
 if __name__ == '__main__':
     main()
